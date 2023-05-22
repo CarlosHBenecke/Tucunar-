@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart JS</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="display: flex;">
+    <div>
+        <canvas id="myChart" style="position: relative; height:40vh; width:40vw"></canvas>
+    </div>
+ 
+</body>
+<script>
+
+    const data = {
+  labels: [
+    'Força',
+    'Territorialismo',
+    'Tamanho',
+    'Periodicidade',
+    'Distribuição',
+    'Exuberância',
+    'Resistência'
+  ],
+  datasets: [{
+    label: 'Tucunaré Açu',
+    data: [9,10,10,5,4,8,10],
+    fill: true,
+    
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
+  }, {
+    label: 'Tucunaré Borboleta',
+    data: [5,7,7,6,8,9,4],
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }, {
+    label: 'Tucunaré Popoca',
+    data: [7,9,7,5,4,8,9],
+    fill: true,
+    backgroundColor: 'rgba(21,0,0, 0.2)',
+    borderColor: 'rgb(21,0,0)',
+    pointBackgroundColor: 'rgb(21,0,0)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(21,0,0)'
+  }, {
+    label: 'Tucunaré Vazzoleri',
+    data: [6,10,8,8,8,7,8],
+    fill: true,
+    backgroundColor: 'rgba(252,3,252, 0.2)',
+    borderColor: 'rgb(252,3,252)',
+    pointBackgroundColor: 'rgb(252,3,252)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(252,3,252)'
+  }, {
+    label: 'Tucunaré Royal',
+    data: [4,6,6,7,6,9,5],
+    fill: true,
+    backgroundColor: 'rgba(94,189,66, 0.2)',
+    borderColor: 'rgb(94,189,66)',
+    pointBackgroundColor: 'rgb(94,189,66)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(94,189,66)'
+  }, {
+    label: 'Tucunaré Jari',
+    data: [6,7,6,8,4,6,7],
+    fill: true,
+    backgroundColor: 'rgba(181,154,74, 0.2)',
+    borderColor: 'rgb(181,154,74)',
+    pointBackgroundColor: 'rgb(181,154,74)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(181,154,74)'
+  }, {
+    label: 'Tucunaré Azul',
+    data: [7,9,8,10,9,7,8],
+    fill: true,
+    backgroundColor: 'rgba(0,0,255, 0.2)',
+    borderColor: 'rgb(0,0,255)',
+    pointBackgroundColor: 'rgb(0,0,255)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(0,0,255)'
+  }, {
+    label: 'Tucunaré Paca',
+    data: [10,10,8,5,4,6,9],
+    fill: true,
+    backgroundColor: 'rgba(123,134,121, 0.2)',
+    borderColor: 'rgb(123,134,121)',
+    pointBackgroundColor: 'rgb(123,134,121)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(123,134,121)'
+  }, {
+    label: 'Tucunaré Pitanga',
+    data: [4,6,5,10,6,9,5],
+    fill: true,
+    backgroundColor: 'rgba(245,134,10, 0.2)',
+    borderColor: 'rgb(245,134,10)',
+    pointBackgroundColor: 'rgb(245,134,10)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(245,134,10)'
+  }, {
+    label: 'Tucunaré Amarelo',
+    data: [7,9,8,10,8,7,7],
+    fill: true,
+    backgroundColor: 'rgba(255,255,0, 0.2)',
+    borderColor: 'rgb(255,255,0)',
+    pointBackgroundColor: 'rgb(255,255,0)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255,255,0)'
+  }, {
+    label: 'Tucunaré Fogo',
+    data: [8,10,7,8,5,10,8],
+    fill: true,
+    backgroundColor: 'rgba(255,0,0, 0.2)',
+    borderColor: 'rgb(255,0,0)',
+    pointBackgroundColor: 'rgb(255,0,0)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255,0,0)'
+  }, {
+    label: 'Tucunaré Pinima',
+    data: [7,9,8,8,8,7,8],
+    fill: true,
+    backgroundColor: 'rgba(0,255,13, 0.2)',
+    borderColor: 'rgb(0,255,13)',
+    pointBackgroundColor: 'rgb(0,255,13)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(0,255,13)'
+  }]
+};
+
+const config = {
+  type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+};
+</script>
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    )
+</script>
+
+
+</html>

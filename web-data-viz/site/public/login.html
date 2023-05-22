@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/funcoes.js"></script>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="js/botoes.js">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Satisfy&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
+    <title>Login-Cadastro</title>
+</head>
+
+<body>
+
+    <body>
+        <!-- Página Início -->
+        <!-- header -->
+        <div class="header">
+            <div class="container">
+                <a href="./index.html"><img src="./assets/imagens/logo.jpg" width="90px" class="logo"></a>
+                <span class="titulo">
+                    <style>
+                        @font-face {
+                            font-family: Heaters;
+                            src: url(Heaters.otf);
+                        }
+
+                        ;
+                    </style>Tucunaré
+                </span>
+                <ul class="navbar">
+                    <li><a>Início</a></li>
+                    <li>
+                        <a href="./index.html#Informações">Informações</a>
+                    </li>
+                    <li><a href="./index.html#Curiosidades">Sobre Mim</a></li>
+                    <li>
+                        <a href="./index.html#FAQ">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="./login.html"><button class="botaoLogin">Login</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <section>
+            <div class="containerLogin">
+                <div class="buttonsForm">
+                    <div class="btnColor"></div>
+                    <button id="btnLogin"><span style=" font-weight: 1000;">Login</span> </button>
+                    <button id="btnCadastro"><span style=" font-weight: 1000;">Cadastro</span></button>
+                </div>
+                <form id="Login">
+                    <input type="text" placeholder="Email" required />
+                    <i class="fas fa-envelope iEmailLogin"></i>
+                    <input type="password" placeholder="Senha" required />
+                    <i class="fas fa-lock iPasswordLogin"></i>
+                    <button type="button" onclick="entrar()">Login</button>
+                    <div class="bemvindo">Bem-Vindo Pescador!</div>
+                </form>
+
+                <form id="Cadastro">
+                    <input type="text" placeholder="Nome" required id="nome_input" />
+                    <i class="fas fa-user iUser"></i>
+                    <input type="text" placeholder="Email@provedor.com" required id="email_input" />
+                    <i class="fas fa-envelope iEmail"></i>
+                    <input type="password" placeholder="Senha" required id="senha_input" />
+                    <i class="fas fa-lock iPassword"></i>
+                    <input type="password" placeholder="Confirmar Senha" required id="confirmacao_senha_input" />
+                    <i class="fas fa-lock iPassword2"></i>
+
+                    <button type="button" onclick="cadastrar()">Cadastrar</button>
+                </form>
+            </div>
+        </section>
+
+    </body>
+
+</html>
+<script>
+    var formSignin = document.querySelector('#Login')
+    var formSignup = document.querySelector('#Cadastro')
+    var btnColor = document.querySelector('.btnColor')
+
+    document.querySelector('#btnLogin')
+        .addEventListener('click', () => {
+            formSignin.style.left = "25px"
+            formSignup.style.left = "450px"
+            btnColor.style.left = "0px"
+        })
+
+    document.querySelector('#btnCadastro')
+        .addEventListener('click', () => {
+            formSignin.style.left = "-450px"
+            formSignup.style.left = "25px"
+            btnColor.style.left = "110px"
+        })
+
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = nome_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+        if (confirmacaoSenhaVar != senhaVar) {
+            alert("As senhas não são iguais")
+        } else if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+
+
+            return false;
+        } else {
+               fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar,
+
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        }
+
+
+    }
+
+</script>

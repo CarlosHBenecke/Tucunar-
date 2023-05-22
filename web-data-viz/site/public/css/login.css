@@ -1,0 +1,202 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    color:  #076408;
+    background-color:#9DA99C;
+    overflow-x: hidden;
+}
+
+.container{
+    width: 99%;
+    margin: auto;
+    display: flex;
+}
+
+.header{
+    height: 90px;
+    border-bottom: 3px solid #076408;
+    
+    
+}
+
+.header .container{
+    justify-content: space-between;
+}
+.header a{
+    text-decoration: none;
+    color: #076408;
+}
+
+.agora{
+    font-weight: 800;
+    color:#ff0000;
+}
+.navbar{
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    color: #076408;
+}
+
+.logo{
+    mix-blend-mode: multiply;
+    margin-left: 1px;
+}
+
+.titulo{
+    color: #076408;
+    width: fit-content;
+    font-weight: 500;
+    font-family: 'Heaters';
+    font-size: 80px;
+    
+}
+.botaoLogin{
+    background-color: #076408;
+    border-radius: 10px;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    color:#ff0000;
+    font-size: 45px;
+    padding: 1px 20px;
+    text-decoration: none;
+    font-family: 'Heaters';         
+    font-weight: 700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cinzel', serif;
+  }
+  
+  section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .containerLogin    {
+    background-color: rgb(228, 223, 223);
+    padding: 4px;
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 rgb(0, 100, 9);
+    margin-top: -100px;
+    
+  }
+  
+  form {
+    position: absolute;
+    margin-top: 80px;
+    transition: .5s;
+    width: 300px;
+    height: 400px;
+  }
+  
+  .buttonsForm {
+    margin-top: 40px;
+    position: relative;
+    border-radius: 30px;
+    box-shadow: 0 0 7px 0 rgb(0, 100, 9);
+    
+  }
+  
+  .buttonsForm button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    position: relative;
+    padding: 10px 29px;
+
+  }
+  
+  .btnColor {
+    position: absolute;
+    width: 128px;
+    height: 100%;
+    background: linear-gradient(to right, #076408, #90fa06);
+    border-radius: 30px;
+    transition: .3s;
+    
+  }
+  
+  input[type="text"], input[type="password"] {
+    border: none;
+    margin-top: 40px;
+    border-radius: 60px;
+    padding: 8px 0 8px 35px;
+    outline: none;
+    width: 100%;
+  }
+  
+  button[type="button"] {
+    background: #076408;
+    color: #ff0000;
+    border-radius: 30px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0px 0 0px 15px;
+    
+    margin-top: 40px;
+    cursor: pointer;
+    font-family: 'Heaters';
+    font-size: 40px;
+  }
+  
+
+  
+  #Login {
+    left: 25px;
+  }
+  
+  #Cadastro {
+    left: 450px;
+  }
+  
+  i {
+    position: absolute;
+    left: 0;
+    padding: 10px 10px;
+  }
+  .iEmailLogin {
+    top: 35px;
+  }  
+  .iPasswordLogin {
+    top: 109px;
+  }
+  .iUser {
+    top: 35px;
+  }
+  .iEmail {
+    top: 109px;
+  }
+  
+  .iPassword {
+    top: 182px;
+  }
+  
+  .iPassword2 {
+    top: 256px;
+  }
+  .bemvindo{
+    margin-top: 50px;
+    font-family: 'Heaters';
+    color: #ff0000;
+    font-size: 50px;
+  }

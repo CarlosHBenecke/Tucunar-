@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    color:  #076408;
+    background-color:#9DA99C;
+    overflow-x: hidden;
+}
+ 
+.header{
+    height: 90px;
+    border-bottom: 3px solid #076408;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    color: #076408;
+    font-weight: 500;
+    font-family: 'Heaters';
+    font-size: 80px;
+    
+}
+    
+.logo{
+    mix-blend-mode: multiply;
+    margin-left: 1px;
+}
+.pergunta{
+    margin-left: 15px;
+}
+.btnResultado{
+    margin-left: 15px;
+    background-color: #076408;
+        border-radius: 10px;
+        border: 0;
+        display: inline-block;
+        cursor: pointer;
+        color:#9DA99C;
+        font-size: 45px;
+        padding: 1px 20px;
+        text-decoration: none;
+        font-family: 'Heaters';         
+        font-weight: 500;
+}
+
