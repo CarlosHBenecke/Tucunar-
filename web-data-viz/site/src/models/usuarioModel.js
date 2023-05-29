@@ -31,13 +31,9 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucao);
 }
 
-function avaliarResultado(idUser,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu){
+function avaliarResultado(id,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu){
     var instrucao =`
-        update usuario set fkModalidade='${fkModalidade}' where id='${idUser}';
-        update usuario set fkEspecie='${fkEspecie}' where id='${idUser}';
-        update usuario set Assiduidade='${fkAssiduidade}' where id='${idUser}';
-        update usuario set notaQuiz='${notaQuiz}' where id='${idUser}';
-        update usuario set fkTorfeu='${fkTrofeu}' where id='${idUser}';
+        update usuario set fkModalidade='${fkModalidade}',fkEspecie='${fkEspecie}',fkAssiduidade='${fkAssiduidade}',notaQuiz='${notaQuiz}',fkTrofeu='${fkTrofeu}' where id='${id}';
     `;
     return database.executar(instrucao);
 }

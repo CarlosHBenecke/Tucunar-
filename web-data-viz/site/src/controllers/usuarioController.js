@@ -102,7 +102,7 @@ function avaliarResultado(req,res){
      var fkAssiduidade =req.body.fkAssiduidadeServer 
      var notaQuiz =req.body.notaQuizServer 
      var fkTrofeu =req.body.fkTrofeuServer
-    var idUser = req.body.idUserServer
+    var id = req.body.idServer
      if (fkModalidade == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (fkEspecie == undefined) {
@@ -117,7 +117,7 @@ function avaliarResultado(req,res){
     else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.avaliarResultado(idUser,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu)
+        usuarioModel.avaliarResultado(id,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu)
             .then(
                 function (resultado) {
                     res.json(resultado);
