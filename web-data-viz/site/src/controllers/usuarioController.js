@@ -28,11 +28,11 @@ function entrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else {
+    // if (email == undefined) {
+    //     res.status(400).send("Seu email está undefined!");
+    // } else if (senha == undefined) {
+    //     res.status(400).send("Sua senha está indefinida!");
+    // } else {
         
         usuarioModel.entrar(email, senha)
             .then(
@@ -56,7 +56,7 @@ function entrar(req, res) {
                     res.status(500).json(erro.sqlMessage);
                 }
             );
-    }
+    // }
 
 }
 
@@ -96,9 +96,49 @@ function cadastrar(req, res) {
     }
 }
 
+function avaliarResultado(req,res){
+    var fkModalidade = req.body.fkModalidadeServer
+     var fkEspecie = req.body.fkEspecieServer 
+     var fkAssiduidade =req.body.fkAssiduidadeServer 
+     var notaQuiz =req.body.notaQuizServer 
+     var fkTrofeu =req.body.fkTrofeuServer
+    var idUser = req.body.idUserServer
+     if (fkModalidade == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (fkEspecie == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (fkAssiduidade == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    }else if (notaQuiz == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    }else if (fkTrofeu == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    }
+    else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.avaliarResultado(idUser,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    avaliarResultado
 }

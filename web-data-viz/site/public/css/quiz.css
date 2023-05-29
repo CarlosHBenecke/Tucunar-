@@ -25,6 +25,54 @@ body{
     mix-blend-mode: multiply;
     margin-left: 1px;
 }
+.header a{
+    text-decoration: none;
+    color: #076408;
+}
+.navbar{
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    list-style: none;
+    color: #076408;
+}
+.agora{
+    font-weight: 500;
+    text-shadow: 2px 2px red;
+}
+.olaUser{
+    width: fit-content;
+    font-family: 'Cinzel', serif;
+    font-size:30px;
+}
+
+.sobrevoce {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    border-radius: 5px;
+    box-shadow: 7px 7px 13px 7px rgba(50, 50, 50, 0.22);
+    padding: 30px;
+    margin: 20px;
+    width: 400px;
+    height: 450px;
+    text-align: center;
+    align-items: center;
+    transition: all 0.3s ease-out;
+  }
+  .imagem{
+   
+    
+    width: 150px;
+    mix-blend-mode: multiply;
+  }
+
+
 .pergunta{
     margin-left: 15px;
 }
@@ -42,4 +90,10 @@ body{
         font-family: 'Heaters';         
         font-weight: 500;
 }
+.input_respostas{
+    width: 20px;
+    border-width: 5px;
+    border-color: #076408;
+}
+
 

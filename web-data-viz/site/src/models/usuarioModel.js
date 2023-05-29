@@ -31,8 +31,20 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucao);
 }
 
+function avaliarResultado(idUser,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTrofeu){
+    var instrucao =`
+        update usuario set fkModalidade='${fkModalidade}' where id='${idUser}';
+        update usuario set fkEspecie='${fkEspecie}' where id='${idUser}';
+        update usuario set Assiduidade='${fkAssiduidade}' where id='${idUser}';
+        update usuario set notaQuiz='${notaQuiz}' where id='${idUser}';
+        update usuario set fkTorfeu='${fkTrofeu}' where id='${idUser}';
+    `;
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
+    avaliarResultado
 };

@@ -58,11 +58,11 @@
                     <button id="btnCadastro"><span style=" font-weight: 1000;">Cadastro</span></button>
                 </div>
                 <form id="Login">
-                    <input type="text" placeholder="Email" required />
+                    <input type="text" placeholder="Email" id="email_input_login" required />
                     <i class="fas fa-envelope iEmailLogin"></i>
-                    <input type="password" placeholder="Senha" required />
+                    <input type="password" placeholder="Senha" id="senha_input_login" required />
                     <i class="fas fa-lock iPasswordLogin"></i>
-                    <button type="button" onclick="entrar()">Login</button>
+                    <button type="button" id="btnEntrar">Login</button>
                     <div class="bemvindo">Bem-Vindo Pescador!</div>
                 </form>
 
@@ -118,7 +118,7 @@
 
             return false;
         } else {
-               fetch("/usuarios/cadastrar", {
+            fetch("/usuarios/cadastrar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -130,9 +130,9 @@
 
                 })
             }).then(function (resposta) {
-
+                alert("Cadastro realizado com sucesso! Bem vindo(a) Pescador(a)!")
                 console.log("resposta: ", resposta);
-
+                window.location = "./login.html";
 
             }).catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
@@ -142,6 +142,66 @@
         }
 
 
+
+    }
+
+    var btnLogar = document.querySelector("#btnEntrar")
+    btnLogar.addEventListener("click", () => {
+        console.log("entrou")
+        entrar()
+    })
+    function entrar() {
+        ;
+
+        var emailVar = email_input_login.value;
+        var senhaVar = senha_input_login.value;
+
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/quiz.html";
+
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+                alert("Usuário e/ou senha incorretos!")
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
     }
 
 </script>
