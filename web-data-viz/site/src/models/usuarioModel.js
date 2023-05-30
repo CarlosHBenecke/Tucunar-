@@ -38,9 +38,33 @@ function avaliarResultado(id,fkModalidade,fkEspecie,fkAssiduidade,notaQuiz,fkTro
     return database.executar(instrucao);
 }
 
+function obterDados(){
+    var instrucao=`
+    select distinct especies.nomePopular, count(fkEspecie) as votos from usuario join especies on usuario.fkEspecie=especies.idespecie group by fkEspecie order by votos desc limit 5 ;
+    `
+    return database.executar(instrucao);
+}
+
+function obterMedia(){
+    var instrucao=`
+    select truncate(avg(notaQuiz),2) as mediaNotaQuiz from usuario;
+    `
+    return database.executar(instrucao);
+}
+
+function obterModalidade(){
+    var instrucao=`
+    select distinct Modalidade.tipo, count(fkModalidade) as contagem from Modalidade join usuario on fkModalidade=idModalidade group by fkModalidade;
+    `
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    avaliarResultado
+    avaliarResultado,
+    obterDados,
+    obterMedia,
+    obterModalidade
 };

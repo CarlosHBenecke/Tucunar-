@@ -32,7 +32,7 @@
         <ul class="navbar">
             <li class="agora">Sobre Você</li>
             <li><a href="#tucunaquiz">TucunaQuiz</a></li>
-            <li><a href="#resultado">Resultado</a></li>
+            <li><a href="../dashboard/card.html">Resultado</a></li>
             <li id="div_olaUser" class="olaUser"></li>
         </ul>
 
@@ -194,7 +194,7 @@
             Digite a sua resposta! <input type="text" id="ipt_p10" class="input_respostas" maxlength="1"><br><br>
         </div>
 
-        <a href="#div_notaQuiz"><button onclick="avaliarResultado()" class="btnResultado">Ver meu card de pescador!</button></a>
+        <a href="#div_notaQuiz"><button onclick="avaliarResultado()" class="btnResultado">Gerar meu card de pescador!</button></a>
         <div id="div_notaQuiz"></div>
     </section>
 </body>
@@ -281,10 +281,10 @@
 
                 })
             }).then(function (resposta) {
-                alert("Resultado enviado!")
+                alert("Resultado enviado! Quando quiser verificar clique em RESULTADO na barra de navegação")
                 console.log("resposta: ", resposta);
                 window.location = "";
-
+                sessionStorage.NOTA_QUIZ = notaQuiz;
             }).catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
 

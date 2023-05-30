@@ -95,5 +95,25 @@ body{
     border-width: 5px;
     border-color: #076408;
 }
-
+.pescador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardPescador{
+    border-radius: 40px;
+    box-shadow: 7px 7px 13px 7px rgba(50, 50, 50, 0.22);
+    padding: 30px;
+    margin: 20px;
+    width: 1200px;
+    height: 450px;
+    text-align: center;
+    align-items: center;
+    transition: all 0.3s ease-out;
+}
+.cardMedia{
+    display: flex;
+    margin-top: 50px;
+    
+}
 

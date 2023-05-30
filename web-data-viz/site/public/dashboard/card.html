@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Satisfy&display=swap" rel="stylesheet">
+    <title>TucunaQuiz</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body onload="obterDados(), obterMedia(), obterModalidade()">
+    <!-- Página Início -->
+    <!-- header -->
+    <div class="header">
+        <img src="../assets/imagens/logo.jpg" width="90px" class="logo">
+        <ul class="navbar">
+            <li><a href="../dashboard/quiz.html"> Sobre Você</a></li>
+            <li><a href="../dashboard/quiz.html#tucunaquiz">TucunaQuiz</a></li>
+            <li class="agora">Resultado</li>
+            <li id="div_olaUser" class="olaUser"></li>
+        </ul>
+    </div>
+
+    <section>
+        <div class="pescador">
+            <div class="cardPescador">
+                <div style="width: 60%; float: left;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div style="width: 30%; float: right;" >
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <div id="div_media" class="cardMedia">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+<script>
+    var olaUser = sessionStorage.getItem('NOME_USUARIO')
+    div_olaUser.innerHTML = `Bem-Vindo(a)<br> ${olaUser}`
+
+    function obterDados() {
+        let labels = []
+
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Top 5 Espécies Escolhidas',
+                data: [],
+                borderColor: 'rgb(7,100,8)',
+                borderWidth: 1,
+                backgroundColor: 'rgb(7,100,8,0.3)'
+
+            }
+            ]
+        };
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+
+        fetch("/usuarios/obter").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+
+                        labels.push(resposta[i].nomePopular)
+                        dados.datasets[0].data.push(resposta[i].votos)
+                    }
+                    let myChart = new Chart(
+                        document.getElementById(`myChart`),
+                        config
+                    );
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+
+        console.log(dados)
+        console.log(labels)
+
+    }
+
+    function obterMedia() {
+        var notaQuiz = sessionStorage.getItem('NOTA_QUIZ')
+        var media = []
+        fetch("/usuarios/obterMedia").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+                        media.push(resposta[i].mediaNotaQuiz)
+                    }
+                    if (notaQuiz > media) {
+                        div_media.innerHTML = `Parabéns sua Nota ${notaQuiz} está acima da média ${media} dos usuários.`
+                    } else if (notaQuiz == media) {
+                        div_media.innerHTML = `Show! Sua Nota ${notaQuiz} está na média ${media} dos usuários.`
+                    } else {
+                        div_media.innerHTML = `Sua Nota ${notaQuiz} está abaixo da média ${media} dos usuários.`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+        console.log(media)
+    }
+
+    function obterModalidade() {
+        let mods = []
+        let userMods = []
+        const data = {
+            labels: mods,
+            datasets: [{
+                label: 'BAIT X FLY',
+                data: userMods,
+                backgroundColor: [
+                    'rgb(7,100,8,0.3)',
+                    'rgb(54, 162, 235,0.3)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const config2 = {
+            type: 'pie',
+            data: data,
+        };
+
+
+        fetch("/usuarios/obterModalidade").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+
+                        mods.push(resposta[i].tipo)
+                        userMods.push(resposta[i].contagem)
+                    }
+                    let myChart2 = new Chart(
+                        document.getElementById(`myChart2`),
+                        config2
+                    );
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+
+        console.log(mods)
+        console.log(userMods)
+    }
+</script>
