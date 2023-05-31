@@ -59,6 +59,13 @@ function obterModalidade(){
     return database.executar(instrucao);
 }
 
+function obterAssiduidade(){
+    var instrucao=`
+    select distinct Assiduidade.vezesNoAno, count(fkAssiduidade) as pescarias from usuario join assiduidade on usuario.fkAssiduidade=assiduidade.idAssiduidade group by fkAssiduidade order by pescarias desc;
+    `
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -66,5 +73,6 @@ module.exports = {
     avaliarResultado,
     obterDados,
     obterMedia,
-    obterModalidade
+    obterModalidade,
+    obterAssiduidade
 };

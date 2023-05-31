@@ -36,4 +36,8 @@ router.get("/obterModalidade",function(req,res){
     usuarioController.obterModalidade(req,res);
 });
 
+router.get("/obterAssiduidade",function(req,res){
+    usuarioController.obterAssiduidade(req,res);
+});
+
 module.exports = router;

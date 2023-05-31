@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="obterDados(), obterMedia(), obterModalidade()">
+<body onload="obterDados(), obterMedia(), obterModalidade(), obterAssiduidade()">
     <!-- Página Início -->
     <!-- header -->
     <div class="header">
@@ -31,16 +31,22 @@
 
     <section>
         <div class="pescador">
-            <div class="cardPescador">
-                <div style="width: 60%; float: left;">
+            <container class="cardPescador">
+                <div style="width: 60%; float: left;">Top 5 Espécies de Tucunaré votadas pelos usuários.
                     <canvas id="myChart"></canvas>
                 </div>
-                <div style="width: 30%; float: right;" >
+                <div style="width: 30%; float: right;"> BAIT X FLY
                     <canvas id="myChart2"></canvas>
+                </div>
+                <div id="div_assiduidade" style="width: 60%; "> Pescarias por Ano 
+                    <canvas id="myChart3"></canvas>
                 </div>
                 <div id="div_media" class="cardMedia">
                 </div>
-            </div>
+                <div>
+                    <canvas id="myChart4" style="width:60%;"></canvas>
+                </div>
+            </container>
 
         </div>
     </section>
@@ -61,7 +67,8 @@
                 data: [],
                 borderColor: 'rgb(7,100,8)',
                 borderWidth: 1,
-                backgroundColor: 'rgb(7,100,8,0.3)'
+                backgroundColor: 'rgb(7,100,8,0.3)',
+                
 
             }
             ]
@@ -172,4 +179,69 @@
         console.log(mods)
         console.log(userMods)
     }
+
+    function obterAssiduidade() {
+        let assid = []
+        let assiduidade = []
+        let dados = {
+            labels: assid,
+            datasets: [{
+                axis: 'y',
+                label:'Pescarias no ano',
+                data: assiduidade,
+                backgroundColor: [
+                    'rgba(7,100,8,0.3)',
+                    'rgba(7,100,8,0.3)',
+                    'rgba(7,100,8,0.3)',
+                    'rgba(7,100,8,0.3)'
+                ],
+                borderColor: [
+                    'rgb(7,100,8)',
+                    'rgb(7,100,8)',
+                    'rgb(7,100,8)',
+                    'rgb(7,100,8)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        const config3 = {
+            type: 'bar',
+            data: dados,
+            options: {
+                indexAxis: 'y',
+            }
+        };
+
+
+        fetch("/usuarios/obterAssiduidade").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+
+                        assid.push(resposta[i].vezesNoAno)
+                        assiduidade.push(resposta[i].pescarias)
+                    }
+                    let myChart3 = new Chart(
+                        document.getElementById(`myChart3`),
+                        config3
+                    );
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+
+        console.log(assiduidade)
+        console.log(assid)
+
+    }
+
+    function obterTrofeu(){
+        
+    }
+
 </script>
