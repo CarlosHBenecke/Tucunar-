@@ -40,4 +40,13 @@ router.get("/obterAssiduidade",function(req,res){
     usuarioController.obterAssiduidade(req,res);
 });
 
+router.get("/obterTrofeu",function(req,res){
+    usuarioController.obterTrofeu(req,res);
+});
+
+router.get("/userData/:idUsuario",function(req,res){
+    usuarioController.userData(req,res);
+});
+
+
 module.exports = router;

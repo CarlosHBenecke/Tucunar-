@@ -66,6 +66,23 @@ function obterAssiduidade(){
     return database.executar(instrucao);
 }
 
+function obterTrofeu(){
+    var instrucao=`
+    select distinct trofeu.faixaTamanho, count(fktrofeu) as trofeu from usuario join trofeu on usuario.fktrofeu=trofeu.idtrofeu group by fktrofeu order by trofeu desc;
+    `
+    return database.executar(instrucao);
+}
+function userData(id){
+    var instrucao=`
+    select assiduidade.vezesNoAno, especies.NomePopular, modalidade.tipo, trofeu.faixaTamanho, usuario.notaQuiz from usuario 
+join assiduidade on fkassiduidade=idassiduidade
+join especies on fkespecie=idespecie
+join modalidade on fkmodalidade=idmodalidade
+join trofeu on fktrofeu=idtrofeu
+where usuario.id='${id}';
+    `
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
@@ -74,5 +91,7 @@ module.exports = {
     obterDados,
     obterMedia,
     obterModalidade,
-    obterAssiduidade
+    obterAssiduidade,
+    obterTrofeu,
+    userData
 };

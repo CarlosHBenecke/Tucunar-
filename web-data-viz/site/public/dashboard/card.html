@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="obterDados(), obterMedia(), obterModalidade(), obterAssiduidade()">
+<body onload="obterDados(), obterMedia(), obterModalidade(), obterAssiduidade(), obterTrofeu(), userData()">
     <!-- Página Início -->
     <!-- header -->
     <div class="header">
@@ -42,10 +42,11 @@
                     <canvas id="myChart3"></canvas>
                 </div>
                 <div id="div_media" class="cardMedia">
+                </div><br>
+                <div style="width:50%; float: left;"> Troféus dos Pescadores
+                    <canvas id="myChart4" ></canvas>
                 </div>
-                <div>
-                    <canvas id="myChart4" style="width:60%;"></canvas>
-                </div>
+                <div id="div_dados">Meus Dados</div>
             </container>
 
         </div>
@@ -56,6 +57,7 @@
 <script>
     var olaUser = sessionStorage.getItem('NOME_USUARIO')
     div_olaUser.innerHTML = `Bem-Vindo(a)<br> ${olaUser}`
+    var idUsuario = sessionStorage.getItem('ID_USUARIO')
 
     function obterDados() {
         let labels = []
@@ -106,23 +108,14 @@
 
     }
 
+    var media = 0
     function obterMedia() {
-        var notaQuiz = sessionStorage.getItem('NOTA_QUIZ')
-        var media = []
+        
         fetch("/usuarios/obterMedia").then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    for (var i = 0; i < resposta.length; i++) {
-                        media.push(resposta[i].mediaNotaQuiz)
-                    }
-                    if (notaQuiz > media) {
-                        div_media.innerHTML = `Parabéns sua Nota ${notaQuiz} está acima da média ${media} dos usuários.`
-                    } else if (notaQuiz == media) {
-                        div_media.innerHTML = `Show! Sua Nota ${notaQuiz} está na média ${media} dos usuários.`
-                    } else {
-                        div_media.innerHTML = `Sua Nota ${notaQuiz} está abaixo da média ${media} dos usuários.`
-                    }
+                    media = resposta[0].mediaNotaQuiz
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -241,7 +234,82 @@
     }
 
     function obterTrofeu(){
+        let labels = []
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Troféus dos Pescadores',
+                data: [],
+                borderColor: 'rgb(7,100,8)',
+                borderWidth: 1,
+                backgroundColor: 'rgb(7,100,8,0.3)',
+                
+
+            }
+            ]
+        };
+        const config4 = {
+            type: 'bar',
+            data: dados,
+        };
+
+
+        fetch("/usuarios/obterTrofeu").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+
+                        labels.push(resposta[i].faixaTamanho)
+                        dados.datasets[0].data.push(resposta[i].trofeu)
+                    }
+                    let myChart4 = new Chart(
+                        document.getElementById(`myChart4`),
+                        config4
+                    );
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+
+        console.log(dados)
+        console.log(labels)
         
+    }
+
+    function userData (){
+        var userDatas= []
+        fetch(`/usuarios/userData/${idUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos aaa: ", JSON.stringify(resposta));
+                    for (var i = 0; i < resposta.length; i++) {
+                        userDatas.push(resposta[i])
+                    }
+                    if (resposta[0].notaQuiz > media) {
+                        div_media.innerHTML = `Parabéns sua Nota ${resposta[0].notaQuiz} está acima da média ${media} dos usuários.`
+                    } else if (resposta[0].notaQuiz == media) {
+                        div_media.innerHTML = `Show! Sua Nota ${resposta[0].notaQuiz} está na média ${media} dos usuários.`
+                    } else {
+                        div_media.innerHTML = `Sua Nota ${resposta[0].notaQuiz} está abaixo da média ${media} dos usuários.`
+                    }
+                    div_dados.innerHTML=`Sua Modalidade de Pesca: ${resposta[0].tipo}<br>
+                    Sua espécie favorita:${resposta[0].NomePopular}<br>
+                    Sua assiduidade na pesca: ${resposta[0].vezesNoAno}<br>
+                    Seu troféu: ${resposta[0].faixaTamanho}
+                    `
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+        console.log(userData)
     }
 
 </script>

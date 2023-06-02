@@ -285,6 +285,11 @@
                 console.log("resposta: ", resposta);
                 window.location = "";
                 sessionStorage.NOTA_QUIZ = notaQuiz;
+                sessionStorage.ESPECIE_USER=fkEspecie;
+                sessionStorage.PESCAS_USER=fkAssiduidade;
+                sessionStorage.TROFEU_USER=fkTrofeu;
+                sessionStorage.MODALIDADE_USER=fkModalidade;
+                
             }).catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
 
